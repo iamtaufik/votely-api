@@ -26,15 +26,15 @@ export const createVotes = async (req: Request, res: Response) => {
 };
 
 export const getVotes = async (req: Request, res: Response) => {
+  const { publisher } = req.body;
   try {
     const result = await prisma.votes.findMany({
       where: {
-        AND: [
-          { deletedAt: null },
-          // { publisher: session.user.email },
-        ],
+        publisher: publisher,
+        deletedAt: null,
       },
     });
+
     return res.status(200).json({ status: 'OK', code: 200, result });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
