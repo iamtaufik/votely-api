@@ -2,6 +2,7 @@ import { Candidate } from '@prisma/client';
 import { Request, Response } from 'express';
 import { generateCode } from '../libs/generateCode';
 import { prisma } from '../libs/prisma';
+import { User } from '../types/user';
 import { Votes } from '../types/votes';
 
 export const createVotes = async (req: Request, res: Response) => {
@@ -26,11 +27,13 @@ export const createVotes = async (req: Request, res: Response) => {
 };
 
 export const getVotes = async (req: Request, res: Response) => {
-  const { publisher } = req.body;
+  // console.log(req.user);
+  // const { publisher } = req.body;
+  const { emails } = req.user as User;
   try {
     const result = await prisma.votes.findMany({
       where: {
-        publisher: publisher,
+        publisher: emails[0].value,
         deletedAt: null,
       },
     });
