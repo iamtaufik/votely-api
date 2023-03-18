@@ -6,7 +6,9 @@ import { User } from '../types/user';
 import { Votes } from '../types/votes';
 
 export const createVotes = async (req: Request, res: Response) => {
-  const { candidates, endDateTime, startDateTime, title, publisher } = req.body;
+  const { candidates, endDateTime, startDateTime, title } = req.body;
+  const { emails } = req.user as User;
+
   try {
     const result = await prisma.votes.create({
       data: {
@@ -14,7 +16,7 @@ export const createVotes = async (req: Request, res: Response) => {
         endDateTime: endDateTime,
         startDateTime: startDateTime,
         title: title,
-        publisher: publisher,
+        publisher: emails[0].value,
         code: generateCode(6),
         deletedAt: null,
       },
@@ -27,8 +29,6 @@ export const createVotes = async (req: Request, res: Response) => {
 };
 
 export const getVotes = async (req: Request, res: Response) => {
-  // console.log(req.user);
-  // const { publisher } = req.body;
   const { emails } = req.user as User;
   try {
     const result = await prisma.votes.findMany({
