@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../libs/prisma';
+import { User } from '../types/user';
 
 export const getParticipant = async (req: Request, res: Response) => {
   const { code } = req.params;
@@ -18,13 +19,13 @@ export const getParticipant = async (req: Request, res: Response) => {
 };
 
 export const createCandidate = async (req: Request, res: Response) => {
-  const { candidate, email, code } = req.body;
+  const { candidate, code } = req.body;
+  const { emails } = req.user as User;
   try {
     const result = await prisma.participant.create({
       data: {
         candidate: candidate,
-        //    email: session.user.email,
-        email: email,
+        email: emails[0].value,
         code: code as string,
       },
     });
