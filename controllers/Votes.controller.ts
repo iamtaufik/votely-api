@@ -64,6 +64,8 @@ export const getDetailVotes = async (req: Request, res: Response) => {
         deletedAt: null,
       },
     });
+    // console.log(votes);
+    if (!votes) return res.status(404).json({ status: 'NOT_FOUND', code: 404, result: null });
 
     // Get Participants of the Vote
     const participants = await prisma.participant.findMany({
