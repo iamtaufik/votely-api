@@ -4,11 +4,11 @@ import { User } from '../types/user';
 
 export const getParticipant = async (req: Request, res: Response) => {
   const { code } = req.params;
-  const { email } = req.body;
+  const { emails } = req.user as User;
   try {
     const result = await prisma.participant.findFirst({
       where: {
-        email: email as string,
+        email: emails[0].value,
         code: code as string,
       },
     });
