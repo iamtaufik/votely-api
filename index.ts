@@ -40,11 +40,11 @@ app.use(
   expressSession({
     secret: String(process.env.SESSION_KEY),
     saveUninitialized: false,
-    resave: false,
+    resave: true,
     cookie: {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 100,
-      sameSite: 'lax',
+      sameSite: 'none',
       secure: process.env.NODE_ENV === 'production', // production mode
     },
   })
