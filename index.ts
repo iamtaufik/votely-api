@@ -17,31 +17,29 @@ const port: number = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
 
-// app.use(
-//   cookieSession({
-//     secret: 'aaaaa',
-//     name: 'session',
-//     keys: [String(process.env.SESSION_KEY)],
-//     maxAge: 24 * 60 * 60 * 100,
-//     sameSite: 'none',
-//     secure: process.env.NODE_ENV === 'production',
-//   })
-// );
-
-// app.set('trust proxy', 1);
 app.use(
-  expressSession({
+  cookieSession({
     name: 'session',
-    secret: String(process.env.SESSION_KEY),
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-      maxAge: 24 * 60 * 60 * 100,
-      sameSite: 'none',
-      secure: process.env.NODE_ENV === 'production', // production mode
-    },
+    keys: [String(process.env.SESSION_KEY)],
+    maxAge: 24 * 60 * 60 * 100,
+    secure: process.env.NODE_ENV === 'production',
   })
 );
+
+// app.set('trust proxy', 1);
+// app.use(
+//   expressSession({
+//     name: 'session',
+//     secret: String(process.env.SESSION_KEY),
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: {
+//       maxAge: 24 * 60 * 60 * 100,
+//       sameSite: 'none',
+//       secure: process.env.NODE_ENV === 'production', // production mode
+//     },
+//   })
+// );
 
 app.use(
   cors({
