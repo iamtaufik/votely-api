@@ -20,6 +20,7 @@ app.use(
     name: 'session',
     keys: [String(process.env.SESSION_KEY)],
     maxAge: 24 * 60 * 60 * 100,
+    sameSite: `${process.env.NODE_ENV === 'production' ? 'none' : 'lax'}`,
     secure: process.env.NODE_ENV === 'production',
   })
 );
