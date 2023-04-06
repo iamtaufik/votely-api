@@ -26,7 +26,7 @@ app.use(express_1.default.json());
 //     secure: process.env.NODE_ENV === 'production',
 //   })
 // );
-// app.set('trust proxy', 1);
+app.set('trust proxy', 1);
 app.use((0, cors_1.default)({
     origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -38,6 +38,7 @@ app.use((0, express_session_1.default)({
     resave: false,
     cookie: {
         maxAge: 24 * 60 * 60 * 100,
+        sameSite: 'none',
         secure: process.env.NODE_ENV === 'production', // production mode
     },
 }));

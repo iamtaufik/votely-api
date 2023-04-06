@@ -27,7 +27,7 @@ app.use(express.json());
 //   })
 // );
 
-// app.set('trust proxy', 1);
+app.set('trust proxy', 1);
 
 app.use(
   cors({
@@ -43,6 +43,7 @@ app.use(
     resave: false,
     cookie: {
       maxAge: 24 * 60 * 60 * 100,
+      sameSite: 'none',
       secure: process.env.NODE_ENV === 'production', // production mode
     },
   })
