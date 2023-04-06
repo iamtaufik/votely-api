@@ -15,30 +15,32 @@ const app: Application = express();
 
 app.use(express.json());
 
-app.use(
-  cookieSession({
-    name: 'session',
-    keys: [String(process.env.SESSION_KEY)],
-    maxAge: 24 * 60 * 60 * 100,
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-  })
-);
-
 // app.use(
-//   expressSession({
+//   cookieSession({
 //     name: 'session',
-//     secret: String(process.env.SESSION_KEY),
-//     saveUninitialized: false,
-//     resave: false,
-//     cookie: {
-//       maxAge: 24 * 60 * 60 * 100,
-//       // secure: false // development mode
-//       secure: process.env.NODE_ENV === 'production', // production mode
-//     },
+//     keys: [String(process.env.SESSION_KEY)],
+//     maxAge: 24 * 60 * 60 * 100,
+//     httpOnly: true,
+//     sameSite: 'lax',
+//     secure: process.env.NODE_ENV === 'production',
 //   })
 // );
+
+app.set('trust proxy', 1);
+app.use(
+  expressSession({
+    name: 'session',
+    secret: String(process.env.SESSION_KEY),
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 100,
+      // secure: false // development mode
+      sameSite: 'none',
+      secure: process.env.NODE_ENV === 'production', // production mode
+    },
+  })
+);
 
 app.use(
   cors({
