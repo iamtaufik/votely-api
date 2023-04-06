@@ -20,6 +20,7 @@ app.use((0, cookie_session_1.default)({
     name: 'session',
     keys: [String(process.env.SESSION_KEY)],
     maxAge: 24 * 60 * 60 * 100,
+    httpOnly: true,
     sameSite: `${process.env.NODE_ENV === 'production' ? 'none' : 'lax'}`,
     secure: process.env.NODE_ENV === 'production',
 }));
