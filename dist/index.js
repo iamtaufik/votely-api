@@ -21,6 +21,7 @@ app.use((0, cookie_session_1.default)({
     name: 'session',
     keys: [String(process.env.SESSION_KEY)],
     maxAge: 24 * 60 * 60 * 100,
+    sameSite: 'none',
     secure: process.env.NODE_ENV === 'production',
 }));
 // app.set('trust proxy', 1);
