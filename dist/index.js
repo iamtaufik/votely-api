@@ -20,6 +20,7 @@ app.use((0, cookie_session_1.default)({
     name: 'session',
     keys: [String(process.env.SESSION_KEY)],
     maxAge: 24 * 60 * 60 * 100,
+    secure: true,
 }));
 app.use((0, cors_1.default)({
     origin: process.env.CLIENT_URL,
