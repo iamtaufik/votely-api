@@ -22,7 +22,7 @@ app.use((0, cookie_session_1.default)({
     maxAge: 24 * 60 * 60 * 100,
 }));
 app.use((0, cors_1.default)({
-    origin: `${process.env.MODE !== 'development' ? 'https://lest-votely.vercel.app' : 'http://localhost:5173'}`,
+    origin: process.env.BASE_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));

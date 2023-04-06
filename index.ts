@@ -24,7 +24,7 @@ app.use(
 
 app.use(
   cors({
-    origin: `${process.env.MODE !== 'development' ? 'https://lest-votely.vercel.app' : 'http://localhost:5173'}`,
+    origin: process.env.BASE_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   })
