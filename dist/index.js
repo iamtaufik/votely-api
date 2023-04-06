@@ -15,6 +15,7 @@ const Auth_route_1 = __importDefault(require("./routes/Auth.route"));
 const Auth_middleware_1 = __importDefault(require("./middlewares/Auth.middleware"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+const port = Number(process.env.APP_PORT) || 3000;
 app.use(express_1.default.json());
 // app.use(
 //   cookieSession({
@@ -48,7 +49,7 @@ app.use(passport_1.default.session());
 app.use('/api/auth', Auth_route_1.default);
 app.use('/api/votes', Auth_middleware_1.default, Votes_route_1.default);
 app.use('/api/participant', Auth_middleware_1.default, Participant_route_1.default);
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server up and running');
 });
 //# sourceMappingURL=index.js.map

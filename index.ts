@@ -13,6 +13,8 @@ dotenv.config();
 
 const app: Application = express();
 
+const port: number = Number(process.env.APP_PORT) || 3000;
+
 app.use(express.json());
 
 // app.use(
@@ -56,6 +58,6 @@ app.use('/api/auth', authRoute);
 app.use('/api/votes', verivyAuth, votesRoute);
 app.use('/api/participant', verivyAuth, participantRoute);
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Server up and running');
 });
