@@ -21,7 +21,7 @@ app.use(
     keys: [String(process.env.SESSION_KEY)],
     maxAge: 24 * 60 * 60 * 100,
     httpOnly: true,
-    sameSite: `${process.env.NODE_ENV === 'production' ? 'none' : 'lax'}`,
+    sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
   })
 );
