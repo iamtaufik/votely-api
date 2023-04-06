@@ -29,12 +29,11 @@ app.use(
     name: 'session',
     secret: String(process.env.SESSION_KEY),
     saveUninitialized: false,
-    resave: true,
+    resave: false,
     cookie: {
-      sameSite: 'none',
       maxAge: 24 * 60 * 60 * 100,
       // secure: false // development mode
-      secure: true, // production mode
+      secure: process.env.NODE_ENV === 'production', // production mode
     },
   })
 );
