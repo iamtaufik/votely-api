@@ -1,7 +1,7 @@
 export interface Participant {
   id: String;
   email: String;
-  participateAt: DateTime;
+  participateAt: Date;
   candidate: String;
   code: String;
 }

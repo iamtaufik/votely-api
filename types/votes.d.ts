@@ -1,3 +1,5 @@
+import { Candidate } from 'candidate';
+
 export interface Votes {
   id: string;
   publisher: string;
