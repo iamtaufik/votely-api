@@ -7,8 +7,7 @@ const express_1 = __importDefault(require("express"));
 const Participant_route_1 = __importDefault(require("./routes/Participant.route"));
 const Votes_route_1 = __importDefault(require("./routes/Votes.route"));
 const passport_1 = __importDefault(require("passport"));
-// import cookieSession from 'cookie-session';
-const express_session_1 = __importDefault(require("express-session"));
+const cookie_session_1 = __importDefault(require("cookie-session"));
 require("./passport");
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -17,25 +16,25 @@ const Auth_middleware_1 = __importDefault(require("./middlewares/Auth.middleware
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use((0, cookie_session_1.default)({
+    name: 'session',
+    keys: [String(process.env.SESSION_KEY)],
+    maxAge: 24 * 60 * 60 * 100,
+    secure: process.env.NODE_ENV === 'production',
+}));
 // app.use(
-//   cookieSession({
+//   expressSession({
 //     name: 'session',
-//     keys: [String(process.env.SESSION_KEY)],
-//     maxAge: 24 * 60 * 60 * 100,
-//     secure: true,
+//     secret: String(process.env.SESSION_KEY),
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: {
+//       maxAge: 24 * 60 * 60 * 100,
+//       // secure: false // development mode
+//       secure: process.env.NODE_ENV === 'production', // production mode
+//     },
 //   })
 // );
-app.use((0, express_session_1.default)({
-    name: 'session',
-    secret: String(process.env.SESSION_KEY),
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-        maxAge: 24 * 60 * 60 * 100,
-        // secure: false // development mode
-        secure: process.env.NODE_ENV === 'production', // production mode
-    },
-}));
 app.use((0, cors_1.default)({
     origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
