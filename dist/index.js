@@ -38,7 +38,7 @@ app.use((0, express_session_1.default)({
     resave: false,
     cookie: {
         maxAge: 24 * 60 * 60 * 100,
-        sameSite: 'none',
+        // sameSite: 'none',
         secure: process.env.NODE_ENV === 'production', // production mode
     },
 }));
