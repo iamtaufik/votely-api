@@ -2,7 +2,8 @@ import express, { Application } from 'express';
 import participantRoute from './routes/Participant.route';
 import votesRoute from './routes/Votes.route';
 import passport from 'passport';
-import cookieSession from 'cookie-session';
+// import cookieSession from 'cookie-session';
+import expressSession from 'express-session';
 import './passport';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -14,12 +15,26 @@ const app: Application = express();
 
 app.use(express.json());
 
+// app.use(
+//   cookieSession({
+//     name: 'session',
+//     keys: [String(process.env.SESSION_KEY)],
+//     maxAge: 24 * 60 * 60 * 100,
+//     secure: true,
+//   })
+// );
+
 app.use(
-  cookieSession({
+  expressSession({
     name: 'session',
-    keys: [String(process.env.SESSION_KEY)],
-    maxAge: 24 * 60 * 60 * 100,
-    secure: true,
+    secret: String(process.env.SESSION_KEY),
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 100,
+      // secure: false // development mode
+      secure: true, // production mode
+    },
   })
 );
 
