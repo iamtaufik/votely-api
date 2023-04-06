@@ -22,7 +22,7 @@ app.use((0, cookie_session_1.default)({
     maxAge: 24 * 60 * 60 * 100,
 }));
 app.use((0, cors_1.default)({
-    origin: process.env.BASE_URL,
+    origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
