@@ -39,15 +39,28 @@ app.use(
 app.use(
   expressSession({
     secret: String(process.env.SESSION_KEY),
-    saveUninitialized: false,
-    resave: false,
+    saveUninitialized: true,
+    resave: true,
     cookie: {
+      httpOnly: true,
       maxAge: 24 * 60 * 60 * 100,
       sameSite: 'none',
       secure: process.env.NODE_ENV === 'production', // production mode
     },
   })
 );
+// app.use(
+//   expressSession({
+//     secret: String(process.env.SESSION_KEY),
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: {
+//       maxAge: 24 * 60 * 60 * 100,
+//       sameSite: 'none',
+//       secure: process.env.NODE_ENV === 'production', // production mode
+//     },
+//   })
+// );
 
 app.use(passport.initialize());
 app.use(passport.session());
