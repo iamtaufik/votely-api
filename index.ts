@@ -29,8 +29,9 @@ app.use(
     name: 'session',
     secret: String(process.env.SESSION_KEY),
     saveUninitialized: false,
-    resave: false,
+    resave: true,
     cookie: {
+      sameSite: 'none',
       maxAge: 24 * 60 * 60 * 100,
       // secure: false // development mode
       secure: true, // production mode
