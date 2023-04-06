@@ -39,8 +39,8 @@ app.use(
 app.use(
   expressSession({
     secret: String(process.env.SESSION_KEY),
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
     cookie: {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 100,
